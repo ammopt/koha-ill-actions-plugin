@@ -2,7 +2,7 @@ package Koha::Plugin::Com::PTFSEurope::IllActions;
 
 use Modern::Perl;
 
-use base            qw(Koha::IllActions::Base);
+use base            qw(Koha::Plugins::Base);
 use Koha::DateUtils qw( dt_from_string );
 
 use File::Basename qw( dirname );
@@ -90,6 +90,23 @@ sub configure {
                 '/cgi-bin/koha/plugins/run.pl?class=Koha::Plugin::Com::PTFSEurope::IllActions&method=configure' );
         exit;
     }
+}
+
+=head3 ill_table_actions
+
+Define ILL table actions
+
+=cut
+
+sub ill_table_actions {
+    my ( $self ) = @_;
+ 
+    return  {
+        button_class               => 'btn btn-default btn-sm',
+        button_link                => '/cgi-bin/koha/ill/ill-requests.pl?method=illview&amp;illrequest_id=',
+        append_column_data_to_link => 1,
+        button_link_text           => 'Only used if button_link_translatable_text is not set'
+    };
 }
 
 
